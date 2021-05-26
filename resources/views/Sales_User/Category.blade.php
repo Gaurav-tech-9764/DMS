@@ -17,7 +17,7 @@
    
         <!-- /.col -->
         <div class="col-sm-6 col-8 col-lg-12">
-        <a href="#" class="btn btn-success"  data-toggle="modal" data-target="#AddCategory" style="text-align: right;" title="Add Category" ><i class="fa fa-list-alt margin-r-5" aria-hidden="true"></i>Add Category</a>
+        <a href="#" class="btn btn-success"  data-toggle="modal" data-target="#AddCategory" title="Add Category" ><i class="fa fa-list-alt margin-r-5" aria-hidden="true"></i>Add Category</a>
     
        
         <div class="card">

@@ -193,7 +193,7 @@
                                      <label for="EditProduct_category" class="col-md-4 col-form-label text-md-right">{{ __('Product Category') }}</label>
                                 <div class="col-md-6">
                                     <select name="EditProduct_category" class="form-control @error('EditProduct_category') is-invalid @enderror" value="{{old('EditProduct_category')}}" id="EditProduct_category">
-                                    <option value="" name="testcategory" disabled selected>Select your Product Category</option>
+                                    <option value="" disabled selected>Select your Product Category</option>
                                     @foreach($Category as $key => $list)
                                     <option value="{{$list->id}}">{{$list->Category_Name}}</option>
                                 @endforeach
@@ -281,9 +281,9 @@
                       $('#id').val(getproducts.id);
                       $('#EditProduct_name').val(getproducts.Product_Name);
                       $('#EditProduct_Description').val(getproducts.Product_description);
-                      $('#testcategory').val(getproducts.Category_Name);
+                      $('#EditProduct_category').val(getproducts.id);
                       $('#EditProduct_Price').val(getproducts.product_price);
-                     
+         
                       $('#EditproductModal').modal('toggle');
                     
 

@@ -32,6 +32,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+// Create the Users
+
     public function create(Request $request)
     {
        $validator= Validator::make($request->all(), [
@@ -60,7 +62,7 @@ class UserController extends Controller
                 
 
     }
-   
+// _____/Create Users   
     /**
      * Store a newly created resource in storage.
      *
@@ -74,23 +76,31 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show()
+
+// Listing of the Users
+
+
+public function show()
     {
-        if(Auth::user()->Role_id == 1||Auth::user()->Role_id == 3){
+        if(Auth::user()->Role_id == 1||Auth::user()->Role_id == 3)
+        {
 
             $List = User::Where('Role_id','!=', "3")->orderBy('id', 'DESC')->get();
        
         }
-else{
+    else
+    {
 
     $List = User::Where('Role_id','!=', "3")->where('is_active',"1")->orderBy('id', 'DESC')->get();
-}
+    }
      
-$role= Role::all();
+    $role= Role::all();
 
         return view('includes.Foruserlist',compact('List','role'));
-    }
-
+    
+    
+}
+//____/lsiting Users
     /**
      * Show the form for editing the specified resource.
      *
@@ -98,9 +108,9 @@ $role= Role::all();
      * @return \Illuminate\Http\Response
      */
  
-// Edit information modal functions
+// get info for Edit information modal functions
 
-    public function getuser($id)
+public function getuser($id)
     {
       
         $getuser = User::Where('id', $id)->first();
@@ -121,10 +131,12 @@ public function uploadimage(Request $request, $id)
             'image' => 'mimes:jpeg,jpg,png,gif|required|max:1000kb'
             
         ]);
-            if(!$validator->passes()){
+            if(!$validator->passes())
+            {
                 return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
-                 }
-          else{
+            }
+          else
+       {  
                     $upload=User::find($id);
                     if($request->hasfile('image')){
                     $file = $request->file('image');
@@ -132,21 +144,21 @@ public function uploadimage(Request $request, $id)
                     $filename = $id.'.'.$extension;
                     $file->move('uploads/profilepicture/',$filename);
                     $upload->Picture= $filename;
-                }
-                else{
+            }
+        else
+            {
                     return $request;
-                
                     $upload->Picture= '';
-                }
+            }
             
             
                 $upload->save();
                 return response()->json(['status'=>1, 'msg'=>'Profile Image has been successfully Updated']);
-                }
+        }
         
     
 }
-// upload modal functions end
+// upload imagel functions end
     /**
      * Update the specified resource in storage.
      *
@@ -206,23 +218,39 @@ public function update(Request $request, $id){
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
+// Make user InActive or DELete
 public function destroy($id, Request $request){
                 
     User::where('id', $id)->update(['is_Active' => "0"]);
 
         return response()->json(['success'=>"Record Has been Deleted!!"]);
     }
+
+// Make user InActive or DELete
+
+//For User profile page
+
  public function userprofile()
     {
      return view('includes.userprofile');
  }
+ //____For User Profile Page
+
+
+
+
 ///Functions for sales User
+////For category page
 
 public function category()
 {
     $Category = category::orderBy('id', 'DESC')->get();
     return view('Sales_User.Category',compact('Category'));
 }
+
+///Adding Categroy
+
+
 public function Addcategory(Request $request)
 
 {
@@ -283,6 +311,10 @@ public function UpdateCategory(Request $request, $id){
 
 
 }
+
+//Delete Category with Related Products
+
+
 public function DeleteCategory(Request $request, $id){
    
 
@@ -292,14 +324,13 @@ public function DeleteCategory(Request $request, $id){
     ->delete();
 
  return response()->json(['success'=>"Category Has been Deleted!!"]);
-         
-    
-
-
-
+   
 }
 
 //Function for product for sales user
+///For products Page
+
+
 public function products()
 {
 
@@ -310,6 +341,9 @@ public function products()
     // dd($products);
     return view('Sales_User.products',compact('products','Category'));
 }
+
+////Adding the product
+
 
 public function Addproducts(Request $request)
 {
@@ -362,12 +396,12 @@ else{
 
 public function Editproducts($id){
 
-    $getproducts = products::select('products.*','category.Category_Name')->leftJoin('category', 'products.category_id', '=', 'category.id')
+    $getproducts = products::select('products.*','category.id')->leftJoin('category', 'products.category_id', '=', 'category.id')
     ->Where('products.id', $id)->first();
     return response()->json($getproducts);
 
 }
-
+// For upadating the products
 
 public function Updateproducts(Request $request, $id)
 {
@@ -417,6 +451,8 @@ else{
 
 
 }
+
+////For Delete The Product
 
 public function Deleteproducts($id, Request $request)
 {
