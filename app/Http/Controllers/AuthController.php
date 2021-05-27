@@ -3,6 +3,8 @@
 
 namespace App\Http\Controllers;
 
+use App\category;
+use App\products;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -135,9 +137,12 @@ request()->validate([
         $active=$test2->count();
         $test3= User::Where('is_Active',"0")->get();
         $inactive=$test3->count();
+        $category = category::all()->count();
+        $products = products::all()->count();
 
 
-                return view('dash',compact('list','admin','sales','active','inactive'));
+
+                return view('dash',compact('list','admin','sales','active','inactive','category','products'));
 
       }
 

@@ -107,16 +107,58 @@
     </section>
   
   @else
-  <div class="col-lg-8 col-xs-6">
+  
           <!-- small box -->
-          
-              <h2 style="jsu: center;">Welcome to Data Mangement Systeam:-<br><b>{{ Auth::user()->name }}</b></h2>
+            <!-- Main content -->
+    <section class="content">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-xs-8">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>{{$category}}</h3>
 
+              <p>Total Categories</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-list"></i>
+            </div>
+         
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3>{{$products}}</h3>
+
+              <p>Total Products</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-tag"></i>
+            </div>
+         
+          </div>
+        </div>
+     
+     
+
+     
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
+      <!-- Main row -->
+      
+      <!-- /.row (main row) -->
+
+    </section>
+  
              
           
           
-          
-        </div>
+   
    
 
   @endif
