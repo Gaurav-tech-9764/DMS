@@ -23,13 +23,12 @@
                                 <div class="card-body">
                                          <div class="table-responsive">
                                             <table class="table">
-                                                <thead class="bg-light">
+                                                <thead class="bg-light" style="text-align: justify;">
                                                     <tr class="border-0">
                                                         <th class="border-0">ID</th>
                                                         <th class="border-0">Product Name</th>
                                                         <th class="border-0">Product Description</th>
-
-                                                        <th class="border-0">Category</th>
+                                                         <th class="border-0">Category</th>
                                                         <th class="border-0">Product Price</th>
                                                         <th class="border-0">Product Image</th>
                                                         <th class="border-0">Edit</th>
