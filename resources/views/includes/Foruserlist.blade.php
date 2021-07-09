@@ -70,6 +70,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{$List->links()}} 
              </section>
       </div>
   </section>

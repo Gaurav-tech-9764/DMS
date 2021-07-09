@@ -7,7 +7,7 @@ use App\User;
 use App\Role;
 use App\category;
 use App\products;
-use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use PhpParser\Node\Expr\FuncCall;
@@ -85,13 +85,13 @@ public function show()
         if(Auth::user()->Role_id == 1||Auth::user()->Role_id == 3)
         {
 
-            $List = User::Where('Role_id','!=', "3")->orderBy('id', 'DESC')->get();
+            $List = User::Where('Role_id','!=', "3")->orderBy('id', 'DESC')->paginate(10);
        
         }
     else
     {
 
-    $List = User::Where('Role_id','!=', "3")->where('is_active',"1")->orderBy('id', 'DESC')->get();
+    $List = User::Where('Role_id','!=', "3")->where('is_active',"1")->orderBy('id', 'DESC')->paginate(10);
     }
      
     $role= Role::all();
@@ -337,7 +337,7 @@ public function products()
  
     $Category = category::all();
     $products= products::select('products.*','category.Category_Name')->leftJoin('category', 'products.category_id', '=', 'category.id')->orderBy('id', 'DESC')
-    ->get();
+    ->paginate(10);
     // dd($products);
     return view('Sales_User.products',compact('products','Category'));
 }
@@ -462,6 +462,8 @@ public function Deleteproducts($id, Request $request)
                 // return redirect()->route('userlist'); 
                 return response()->json(['success'=>"Product Has been Deleted!!"]);
 }
- 
+
+
+
 
 }

@@ -58,7 +58,7 @@
                                         </div>
                                     </div>
                                 </div>
-             
+                                {{$products->links()}} 
 
               
               <!-- /.tab-pane -->
