@@ -17,20 +17,20 @@
     <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        @if(Auth::user()->Picture==0)
+        @if(Auth::user()->picture==0)
             <img src="{{asset('./dist/img/avat.png')}}" class="user-image" alt="User Image">
             @else
-              <img src="../uploads/profilepicture/{{Auth::user()->Picture}}" class="user-image" alt="User Image">
+              <img src="../uploads/profilepicture/{{Auth::user()->picture}}" class="user-image" alt="User Image">
               @endif
               <span class="hidden-xs">{{ Auth::user()->name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-              @if(Auth::user()->Picture==0)
+              @if(Auth::user()->picture==0)
                 <img src="{{asset('./dist/img/avat.png')}}" class="img-circle" alt="User Image">
                 @else
-              <img src="../uploads/profilepicture/{{Auth::user()->Picture}}" class="user-image" alt="User Image">
+              <img src="../uploads/profilepicture/{{Auth::user()->picture}}" class="user-image" alt="User Image">
               @endif
                 <p>
                 {{ Auth::user()->name }}

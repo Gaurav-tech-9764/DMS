@@ -5,20 +5,12 @@ namespace App\Http\Controllers;
 
 use App\category;
 use App\products;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
-use Validator;
 use Redirect;
-use Response;
-
-Use App\User;
-use App\Role;
-
+use App\User;
+use App\roles;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Hash;
-
 use Session;
 
 
@@ -127,13 +119,13 @@ request()->validate([
 
 
       if(Auth::check()){
-        $users = User::where('Role_id','!=', "3");
+        $users = User::where('role_id','!=', "3");
         $list=$users->count();
-        $test= User::Where('Role_id',"1")->get();
+        $test= User::Where('role_id',"1")->get();
         $admin=$test->count();
-        $test1= User::Where('Role_id',"2")->get();
+        $test1= User::Where('role_id',"2")->get();
         $sales=$test1->count();
-        $test2= User::Where('is_Active',"1")->Where('Role_id','!=', "3")->get();
+        $test2= User::Where('is_Active',"1")->Where('role_id','!=', "3")->get();
         $active=$test2->count();
         $test3= User::Where('is_Active',"0")->get();
         $inactive=$test3->count();
@@ -161,7 +153,7 @@ request()->validate([
 
         'email' => $data['email'],
 
-        'Role_id'   => $data['role'],
+        'role_id'   => $data['role'],
 
         'password' => Hash::make($data['password'])
 

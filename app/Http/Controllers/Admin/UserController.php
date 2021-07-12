@@ -7,10 +7,8 @@ use App\User;
 use App\Role;
 use App\category;
 use App\products;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use PhpParser\Node\Expr\FuncCall;
 use Validator;
 class UserController extends Controller
 {
@@ -51,7 +49,7 @@ class UserController extends Controller
             $create= new user;
             $create->name=$request->name;
             $create->email=$request->email;
-            $create->Role_id=$request->role;
+            $create->role_id=$request->role;
           
             $create->password=Hash::make($request->password);
             $create->save();
@@ -82,21 +80,23 @@ class UserController extends Controller
 
 public function show()
     {
-        if(Auth::user()->Role_id == 1||Auth::user()->Role_id == 3)
+        
+        if(Auth::user()->role_id == 1||Auth::user()->role_id == 3)
         {
 
-            $List = User::Where('Role_id','!=', "3")->orderBy('id', 'DESC')->paginate(10);
+            $List = User::Where('role_id','!=', "3")->orderBy('id', 'DESC')->paginate(10);
        
         }
     else
     {
 
-    $List = User::Where('Role_id','!=', "3")->where('is_active',"1")->orderBy('id', 'DESC')->paginate(10);
+    $List = User::Where('role_id','!=', "3")->where('is_active',"1")->orderBy('id', 'DESC')->paginate(10);
     }
      
-    $role= Role::all();
+    $role= Role::Where('id','!=', "3")->get();
+  
 
-        return view('includes.Foruserlist',compact('List','role'));
+        return view('includes.Foruserlist',compact('List','role'))->with('n',1);
     
     
 }
@@ -143,12 +143,12 @@ public function uploadimage(Request $request, $id)
                     $extension = $file->getClientOriginalExtension();
                     $filename = $id.'.'.$extension;
                     $file->move('uploads/profilepicture/',$filename);
-                    $upload->Picture= $filename;
+                    $upload->picture= $filename;
             }
         else
             {
                     return $request;
-                    $upload->Picture= '';
+                    $upload->picture= '';
             }
             
             
@@ -174,7 +174,7 @@ public function update(Request $request, $id){
             'Editname' => 'required|string|max:255',
             'Editemail' => 'required|string|email|max:255',
             'Editrole' => 'required',
-            'if(Auth::user()->Role_id == 1||Auth::user()->Role_id == 3){
+            'if(Auth::user()->role_id == 1||Auth::user()->role_id == 3){
                 "EditStatus"=> "required"
             }',
             
@@ -192,8 +192,8 @@ public function update(Request $request, $id){
             $update=User::find($id);
             $update->name=$request->Editname;
             $update->email=$request->Editemail;
-            $update->Role_id=$request->Editrole;
-            if(Auth::user()->Role_id == 1||Auth::user()->Role_id == 3){
+            $update->role_id=$request->Editrole;
+            if(Auth::user()->role_id == 1||Auth::user()->role_id == 3){
                 if($request->EditStatus==1){
                     $update->is_Active=1;
                 }
@@ -202,8 +202,8 @@ public function update(Request $request, $id){
                 }
                 
             }
-            $update->Number=$request->EditNumber;
-            $update->Designation=$request->EditDesignation;
+            $update->number=$request->EditNumber;
+            $update->designation=$request->EditDesignation;
             $update->password=Hash::make($request->Editpassword);
             $update->save();
             return response()->json(['status'=>1, 'msg'=>'User Details has been successfully Updated']);
@@ -245,7 +245,7 @@ public function destroy($id, Request $request){
 public function category()
 {
     $Category = category::orderBy('id', 'DESC')->get();
-    return view('Sales_User.Category',compact('Category'));
+    return view('Sales_User.Category',compact('Category'))->with('n',1);
 }
 
 ///Adding Categroy
@@ -339,7 +339,7 @@ public function products()
     $products= products::select('products.*','category.Category_Name')->leftJoin('category', 'products.category_id', '=', 'category.id')->orderBy('id', 'DESC')
     ->paginate(10);
     // dd($products);
-    return view('Sales_User.products',compact('products','Category'));
+    return view('Sales_User.products',compact('products','Category'))->with('n',1);
 }
 
 ////Adding the product
@@ -398,6 +398,7 @@ public function Editproducts($id){
 
     $getproducts = products::select('products.*','category.id')->leftJoin('category', 'products.category_id', '=', 'category.id')
     ->Where('products.id', $id)->first();
+
     return response()->json($getproducts);
 
 }

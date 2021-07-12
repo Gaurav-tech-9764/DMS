@@ -25,7 +25,7 @@
                                             <table class="table">
                                                 <thead class="bg-light" style="text-align: justify;">
                                                     <tr class="border-0">
-                                                        <th class="border-0">ID</th>
+                                                        <th class="border-0">Sr.No.</th>
                                                         <th class="border-0">Product Name</th>
                                                         <th class="border-0">Product Description</th>
                                                          <th class="border-0">Category</th>
@@ -39,7 +39,7 @@
                                                 <tbody>
                                                 @foreach ($products as $list)
                                                     <tr>
-                                                        <td>{{ $list->id }}</td>
+                                                        <td>{{ $n++}}</td>
                                                         <td>{{ $list->Product_Name }}</td>
                                                         <td>{{ $list->Product_description }} </td>
                                                         <td>{{ $list->Category_Name }} </td>
@@ -175,7 +175,7 @@
                                 <div class="form-group row">
                                         <label for="EditProduct_name" class="col-md-4 col-form-label text-md-right">{{ __('Product Name') }}</label>
                                     <div class="col-md-6">
-                                        <input id="EditProduct_name" type="text" class="form-control @error('EditProduct_name') is-invalid @enderror" name="EditProduct_name" value="{{old('EditProduct_name')}}"  autocomplete="EditProduct_name"  autofocus>
+                                        <input id="EditProduct_name" type="text" class="form-control @error('EditProduct_name') is-invalid @enderror" name="EditProduct_name"  autocomplete="EditProduct_name"  autofocus>
                                         <span class="text-danger error-text EditProduct_name_error"></span>
                                     </div>
                                 </div>
@@ -183,7 +183,7 @@
                             <div class="form-group row">
                                         <label for="EditProduct_Description" class="col-md-4 col-form-label text-md-right">{{ __('Product Description') }}</label>
                                     <div class="col-md-6">
-                                            <input id="EditProduct_Description" type="text" class="form-control @error('EditProduct_Description') is-invalid @enderror" name="EditProduct_Description" value="{{old('EditProduct_Description')}}"  autocomplete="EditProduct_Description">
+                                            <input id="EditProduct_Description" type="text" class="form-control @error('EditProduct_Description') is-invalid @enderror" name="EditProduct_Description" autocomplete="EditProduct_Description">
 
                                             <span class="text-danger error-text EditProduct_Description_error"></span>
                                     </div>
@@ -191,7 +191,7 @@
                             <div class="form-group row">
                                      <label for="EditProduct_category" class="col-md-4 col-form-label text-md-right">{{ __('Product Category') }}</label>
                                 <div class="col-md-6">
-                                    <select name="EditProduct_category" class="form-control @error('EditProduct_category') is-invalid @enderror" value="{{old('EditProduct_category')}}" id="EditProduct_category">
+                                    <select name="EditProduct_category" class="form-control @error('EditProduct_category') is-invalid @enderror" id="EditProduct_category">
                                     <option value="" disabled selected>Select your Product Category</option>
                                     @foreach($Category as $key => $list)
                                     <option value="{{$list->id}}">{{$list->Category_Name}}</option>
@@ -204,7 +204,7 @@
                             <div class="form-group row">
                                         <label for="EditProduct_Price" class="col-md-4 col-form-label text-md-right">{{ __('Product Price') }}</label>
                                     <div class="col-md-6">
-                                            <input id="EditProduct_Price" type="text" class="form-control @error('EditProduct_Price') is-invalid @enderror" name="EditProduct_Price" value="{{old('EditProduct_Price')}}"  autocomplete="EditProduct_Price">
+                                            <input id="EditProduct_Price" type="text" class="form-control @error('EditProduct_Price') is-invalid @enderror" name="EditProduct_Price" autocomplete="EditProduct_Price">
 
                                             <span class="text-danger error-text EditProduct_Price_error"></span>
                                     </div>
@@ -282,7 +282,7 @@
                       $('#EditProduct_Description').val(getproducts.Product_description);
                       $('#EditProduct_category').val(getproducts.id);
                       $('#EditProduct_Price').val(getproducts.product_price);
-         
+                    
                       $('#EditproductModal').modal('toggle');
                     
 

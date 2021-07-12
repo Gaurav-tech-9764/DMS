@@ -28,7 +28,7 @@
                                             <table class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
-                                                        <th class="border-0">ID</th>
+                                                        <th class="border-0">Sr.No.</th>
                                                         <th class="border-0">Category Name</th>
                                                         <th class="border-0">Category Description</th>
                                                         <th class="border-0">Edit</th>
@@ -39,7 +39,7 @@
                                                 <tbody>
                                                 @foreach ($Category as $list)
                                                     <tr>
-                                                        <td>{{ $list->id }}</td>
+                                                        <td>{{ $n++ }}</td>
                                                         
                                                         <td>{{ $list->Category_Name }}</td>
                                                         
@@ -148,7 +148,7 @@
                      <div class="form-group row">
                                  <label for="EditCategory_name" class="col-md-4 col-form-label text-md-right">{{ __('Category Name') }}</label>
                                 <div class="col-md-6">
-                                  <input id="EditCategory_name" type="text" class="form-control @error('EditCategory_name') is-invalid @enderror" name="EditCategory_name"  value="{{ old('EditCategory_name',$list->	Category_Name) }}" autocomplete="EditCategory_name"  autofocus>
+                                  <input id="EditCategory_name" type="text" class="form-control @error('EditCategory_name') is-invalid @enderror" name="EditCategory_name"  autocomplete="EditCategory_name"  autofocus>
                                   <span class="text-danger error-text EditCategory_name_error"></span>
                                 </div>
                              </div>
@@ -156,7 +156,7 @@
                          <div class="form-group row">
                              <label for="EditCategory_Description" class="col-md-4 col-form-label text-md-right">{{ __('Category Description') }}</label>
                             <div class="col-md-6">
-                              <input id="EditCategory_Description" type="text" class="form-control @error('EditCategory_Description') is-invalid @enderror" name="EditCategory_Description" value="{{ old('EditCategory_Description',$list->Category_description) }}" autocomplete="EditCategory_Description">
+                              <input id="EditCategory_Description" type="text" class="form-control @error('EditCategory_Description') is-invalid @enderror" name="EditCategory_Description"  autocomplete="EditCategory_Description">
                               <span class="text-danger error-text EditCategory_Description_error"></span>
                             </div>
                         </div>

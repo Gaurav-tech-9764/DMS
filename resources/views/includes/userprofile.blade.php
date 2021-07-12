@@ -22,11 +22,11 @@
           <!-- Profile Image -->
           <div class="box box-primary">
           <div class="box-body box-profile">
-          @if(Auth::user()->Picture==0)
+          @if(Auth::user()->picture==0)
           <img class="profile-user-img img-responsive img-circle" src="{{asset('./dist/img/avat.png')}}" alt="User profile picture">
 
                 @else
-              <img class="profile-user-img img-responsive img-circle" src="../uploads/profilepicture/{{Auth::user()->Picture}}" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="../uploads/profilepicture/{{Auth::user()->picture}}" alt="User profile picture">
            @endif
               <h3 class="profile-username text-center">{{Auth::user()->name}}</h3>
 
@@ -37,7 +37,7 @@
                   <b>Email Id</b> <a class="pull-right">{{Auth::user()->email}} </a>
                 </li>
                 <li class="list-group-item">
-                  <b>Designation</b> <a class="pull-right">{{Auth::user()->Designation}} </a>
+                  <b>Designation</b> <a class="pull-right">{{Auth::user()->designation}} </a>
                 </li>
                
               </ul>
@@ -76,17 +76,22 @@
               <strong><i class="fa fa-mobile-phone margin-r-5"></i>Number</strong>
 
               <p class="text-muted">
-              {{Auth::user()->Number}}
+              {{Auth::user()->number}}
               </p>
 
               <hr>
 
               <strong><i class="fa fa-user-circle-o  margin-r-5"></i>Role</strong>
 
-              <p class="text-muted">   @if(Auth::user()->Role_id==1)
+              <p class="text-muted">   @if(Auth::user()->role_id==1 )
+               
                                                         Admin User 
                                                         @else
+                                                        @if(Auth::user()->role_id==3)
+                                                        Super Admin
+                                                      @else
                                                         Sales User
+                                                        @endif
                                                         @endif
               </p>
 

@@ -29,7 +29,7 @@
             
           </a>
         </li>
-        @if(Auth::user()->Role_id == 2)
+        @if(Auth::user()->role_id == 2)
         <li>
           <a href="{{ route('category') }}">
           <i class="fa fa-list-alt" aria-hidden="true"></i> <span>Category Management</span>

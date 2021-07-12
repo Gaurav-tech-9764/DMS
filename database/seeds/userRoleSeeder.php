@@ -13,11 +13,12 @@ class userRoleSeeder extends Seeder
     public function run()
     {
         
-        $status=DB::table('Role')->first();
+        $status=DB::table('roles')->first();
         if($status==NULL){
-            DB::table('Role')->insert(array(
-               array('Roles' => "Admin User"), 
-                array('Roles' => "Sales User")
+            DB::table('roles')->insert(array(
+               array('roles' => "Admin User"), 
+                array('roles' => "Sales User"),
+                array('roles' => "Super Admin")
             ));
         }
       

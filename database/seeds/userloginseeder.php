@@ -19,7 +19,7 @@ class userloginseeder extends Seeder
                 'name' => "Super Admin",
                 'email' => "SuperAdmin@gmail.com",
                 'password' => Hash::make('password'),
-                'Role_id' => 3
+                'role_id' => 3
 
                 ]);
         }

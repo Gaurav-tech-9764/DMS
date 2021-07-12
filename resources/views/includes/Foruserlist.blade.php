@@ -13,7 +13,7 @@
 
       
         <section class="col-xl-8 col-lg-12 col-md-3 col-sm-6 col-8 connectedSortable">
-        @if(Auth::user()->Role_id == 1||Auth::user()->Role_id == 3)
+        @if(Auth::user()->role_id == 1||Auth::user()->role_id == 3)
         <a href="#" class="btn btn-success"  data-toggle="modal" data-target="#AddUserModal" style="float: fix;" title="Add Users" ><i class="fa fa-user-plus margin-r-5" aria-hidden="true"></i>Add Users</a>
          @endif
           <!-- Custom tabs (Charts with tabs)-->
@@ -25,12 +25,12 @@
                                             <table class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
-                                                        <th class="border-0">ID</th>
+                                                        <th class="border-0">Sr.No.</th>
                                                         <th class="border-0">Name</th>
                                                         <th class="border-0">Email</th>
                                                         <th class="border-0">Role</th>
                                                         <th class="border-0">Status</th>
-                                                        @if(Auth::user()->Role_id == 1||Auth::user()->Role_id == 3)
+                                                        @if(Auth::user()->role_id == 1||Auth::user()->role_id == 3)
                                                         <th class="border-0">Edit</th>
                                                         <th class="border-0">Delete</th>
                                                         @endif
@@ -39,12 +39,12 @@
                                                 <tbody>
                                                 @foreach ($List as $user)
                                                     <tr>
-                                                        <td>{{ $user->id }}</td>
+                                                        <td>{{ $n++}}</td>
                                                         
                                                         <td>{{ $user->name }}</td>
                                                         
                                                         <td>{{ $user->email }} </td>
-                                                        @if($user->Role_id==1)
+                                                        @if($user->role_id==1)
                                                         <td>Admin User </td>
                                                         @else
                                                         <td>Sales User</td>
@@ -54,7 +54,7 @@
                                                         @else
                                                         <td style="color: red;">Inactive</td>
                                                         @endif
-                                                        @if(Auth::user()->Role_id == 1||Auth::user()->Role_id == 3)
+                                                        @if(Auth::user()->role_id == 1||Auth::user()->role_id == 3)
                                                         <!-- <td><a href="{{url('userlist/edit/'.$user->id)}}" class="btn btn-success" >Edit</a> </td> -->
 
                                                         <td><a href="javascript:void(0)" onclick="Edituser({{$user->id}})" class="btn btn-info" title="Edit user"><i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i></a> </td>
@@ -116,7 +116,7 @@
                                     <select name="role"class="form-control @error('role') is-invalid @enderror" value="{{old('role')}}"id="role">
                                     <option value="" disabled selected>Select your Role</option>
                                     @foreach($role as $key => $Role)
-                                    <option value="{{$Role->id}}">{{$Role->Roles}}</option>
+                                    <option value="{{$Role->id}}">{{$Role->roles}}</option>
                                 @endforeach
                                     </select>
                              
@@ -173,7 +173,7 @@
                      <div class="form-group row">
                                  <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
                                 <div class="col-md-6">
-                                  <input id="Editname" type="text" class="form-control @error('name') is-invalid @enderror" name="Editname" value="{{ old('name',$user->name) }}"  autocomplete="name"  autofocus>
+                                  <input id="Editname" type="text" class="form-control @error('name') is-invalid @enderror" name="Editname"   autocomplete="name"  autofocus>
                                   <span class="text-danger error-text Editname_error"></span>
                                 </div>
                              </div>
@@ -181,7 +181,7 @@
                          <div class="form-group row">
                              <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
                             <div class="col-md-6">
-                              <input id="Editemail" type="email" class="form-control @error('email') is-invalid @enderror" name="Editemail" value="{{ old('email',$user->email) }}"  autocomplete="email">
+                              <input id="Editemail" type="email" class="form-control @error('email') is-invalid @enderror" name="Editemail"   autocomplete="email">
                               <span class="text-danger error-text Editemail_error"></span>
                             </div>
                         </div>
@@ -189,32 +189,24 @@
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
                          <div class="col-md-6">
                             <select name="Editrole"class="form-control @error('role') is-invalid @enderror"  id="Editrole">
-                            @if($user->Role_id==1)
-                            <option value="1"selected> User Admin</option>
-                            @else
-                            <option value="2" selected>Sales User</option>
-                            @endif
+                            
                             @foreach($role as $key => $Role)
-                            <option value="{{$Role->id}}">{{$Role->Roles}}</option>
+                            <option value="{{$Role->id}}">{{$Role->roles}}</option>
                            @endforeach
                             </select>
                             <span class="text-danger error-text Editrole_error"></span>
                             </div>
                             
                         </div>
-                    @if(Auth::user()->Role_id == 1||Auth::user()->Role_id == 3)
+                    @if(Auth::user()->role_id == 1||Auth::user()->role_id == 3)
                            
                         <div class="form-group row">
                             <label for="Status" class="col-md-4 col-form-label text-md-right">{{ __('User Status') }}</label>
 
                             <div class="col-md-6">
                          <select name="EditStatus"class="form-control @error('role') is-invalid @enderror"  id="EditStatus">
-                            @if($user->is_Active=1)
-                            <option value="1"selected> Active</option>
-                            @else
-                            <option value="0" selected>Inactive</option>
-                            @endif
-                            <option value="1">Active</option>
+                           
+                            <option value="1">Active</option>   
                             <option value="0">InActive</option>
                         
                         </select>
@@ -228,7 +220,7 @@
                             <label for="Number" class="col-md-4 col-form-label text-md-right">{{ __('Contact Number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="EditNumber" type="text" class="form-control @error('Number') is-invalid @enderror" value="{{ old('Number',$user->Number) }}" name="EditNumber" >
+                                <input id="EditNumber" type="text" class="form-control @error('Number') is-invalid @enderror" name="EditNumber" >
                                 <span class="text-danger error-text EditNumber_error"></span>
                             </div>
                         </div>
@@ -237,7 +229,7 @@
                             <label for="Designation" class="col-md-4 col-form-label text-md-right">{{ __('Designation') }}</label>
 
                             <div class="col-md-6">
-                                <input id="EditDesignation" type="text" class="form-control @error('Designation') is-invalid @enderror"  value="{{ old('Designation',$user->Designation) }}" name="EditDesignation"  >
+                                <input id="EditDesignation" type="text" class="form-control @error('Designation') is-invalid @enderror"  name="EditDesignation"  >
 
                                 <span class="text-danger error-text EditDesignation_error"></span>
                             </div>
@@ -366,10 +358,10 @@
                       $('#id').val(getuser.id);
                       $('#Editname').val(getuser.name);
                       $('#Editemail').val(getuser.email);
-                      $('#Editrole').val(getuser.Role_id);
+                      $('#Editrole').val(getuser.role_id);
                       $('#EditStatus').val(getuser.is_Active);
-                      $('#EditNumber').val(getuser.Number);
-                      $('#EditDesignation').val(getuser.Designation);
+                      $('#EditNumber').val(getuser.number);
+                      $('#EditDesignation').val(getuser.designation);
                       $('#EditUserModal').modal('toggle');
                     
 

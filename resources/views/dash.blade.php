@@ -15,7 +15,7 @@
       </h1>
       
     </section>
-    @if(Auth::user()->Role_id == 1||Auth::user()->Role_id == 3)
+    @if(Auth::user()->role_id == 1||Auth::user()->role_id == 3)
 
 
     
