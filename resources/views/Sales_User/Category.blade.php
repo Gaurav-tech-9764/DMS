@@ -37,7 +37,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                @foreach ($Category as $list)
+                                               @foreach ($Category as $list)
                                                     <tr>
                                                         <td>{{ $n++ }}</td>
                                                         

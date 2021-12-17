@@ -17,8 +17,7 @@ use Session;
 class AuthController extends Controller
 
 {
- 
-  
+
 
 
     public function index()
@@ -60,25 +59,49 @@ request()->validate([
         'email' => 'required',
 
         'password' => 'required',
+         ]);
 
-        ]);
+         $loginattempt=User::select('login_attempt','id')->Where('email',$request->only('email'))->first();
+     
+        if($loginattempt){
+          $attemp=$loginattempt->login_attempt;
+          $userid=$loginattempt->id;
+          $credentials = implode($request->only( 'password'));
 
+          if($attemp!=3){
+            if (Auth::attempt(['email' => $request->only('email'), 'password' => $credentials, 'is_Active' => 1])) {
+              User::where('id', $userid)->update(array('login_attempt' => 0 ));
+              return redirect()->intended('dashboard');
+     
+             }
 
-        $credentials = implode($request->only( 'password'));
-        // dd($request->only('email'));
-        // exit;
-
-        // if (Auth::attempt($credentials))
-        if (Auth::attempt(['email' => $request->only('email'), 'password' => $credentials, 'is_Active' => 1])) {
-
-         return redirect()->intended('dashboard');
-
-        }
+             else{
+              User::where('id', $userid)->update(array('login_attempt' => $attemp+1 ));
+        
+             
         $request->Session()->flash('msg','Oppes! You have entered invalid credentials! OR id is Inactive!! ');
 
-
-        
         return redirect()->intended('login');
+  
+            }
+         }
+         else{
+
+          $request->Session()->flash('msg','Your account is blocked!! Contact to admin!!');
+          return redirect()->intended('login');
+
+
+        }
+
+
+        }
+        else{
+
+          $request->Session()->flash('msg','User not found!!');
+          return redirect()->intended('login');
+
+
+        }
     }
 
 

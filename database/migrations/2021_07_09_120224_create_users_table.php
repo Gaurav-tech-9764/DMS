@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('designation')->nullable();
             $table->mediumText('picture')->nullable();
             $table->boolean('is_Active')->default(1);
+            $table->integer('login_attempt')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

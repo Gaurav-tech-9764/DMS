@@ -31,12 +31,20 @@
                                                         <th class="border-0">Role</th>
                                                         <th class="border-0">Status</th>
                                                         @if(Auth::user()->role_id == 1||Auth::user()->role_id == 3)
+                                                        <th class="border-0">Account</th>
+                                                        @endif
+                                                        @if(Auth::user()->role_id == 1||Auth::user()->role_id == 3)
                                                         <th class="border-0">Edit</th>
                                                         <th class="border-0">Delete</th>
                                                         @endif
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+
+                                                    @if($List==NULL)
+
+
+                                                    
                                                 @foreach ($List as $user)
                                                     <tr>
                                                         <td>{{ $n++}}</td>
@@ -55,6 +63,15 @@
                                                         <td style="color: red;">Inactive</td>
                                                         @endif
                                                         @if(Auth::user()->role_id == 1||Auth::user()->role_id == 3)
+                                                            @if($user->login_attempt==3)
+                                                            <td style="color: red;">Blocked</td>
+                                                            @else
+                                                            <td style="color: green;">Working</td>
+                                                            @endif
+                                                        
+                                                      
+                                                        @endif
+                                                        @if(Auth::user()->role_id == 1||Auth::user()->role_id == 3)
                                                         <!-- <td><a href="{{url('userlist/edit/'.$user->id)}}" class="btn btn-success" >Edit</a> </td> -->
 
                                                         <td><a href="javascript:void(0)" onclick="Edituser({{$user->id}})" class="btn btn-info" title="Edit user"><i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i></a> </td>
@@ -63,7 +80,12 @@
                                                       @endif
                                                     </tr>
                                                     @endforeach
+                                                
+                                                @else
+                                                    <td colspan="8" align="center">No Users Found</td>
+                                                
                                                     
+                                                @endif
                                                     
                                                 </tbody>
                                             </table>
